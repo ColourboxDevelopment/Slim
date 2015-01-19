@@ -116,6 +116,16 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/index.php', $env['SCRIPT_NAME']);
     }
 
+    public function testThatScriptNameIsNotStrippedIfItOccursInRequestUri()
+    {
+        $_SERVER['SCRIPT_FILENAME'] = '/var/www/index.php';
+        $_SERVER['REQUEST_URI'] = '/bar/xyz?q=index.php';
+        $_SERVER['SCRIPT_NAME'] = 'index.php';
+        $env = \Slim\Environment::getInstance(true);
+        $this->assertEquals('/bar/xyz?q=index.php', $env['PATH_INFO']);
+        $this->assertEquals('.', $env['SCRIPT_NAME']);
+    }
+
     /**
      * Test parses script name and path info
      *
