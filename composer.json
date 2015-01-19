@@ -1,9 +1,9 @@
 {
-    "name": "slim/slim",
+    "name": "colourbox/slim",
     "type": "library",
     "description": "Slim Framework, a PHP micro framework",
     "keywords": ["microframework","rest","router"],
-    "homepage": "http://github.com/codeguy/Slim",
+    "homepage": "http://github.com/ColourboxDevelopment/Slim",
     "license": "MIT",
     "authors": [
         {
