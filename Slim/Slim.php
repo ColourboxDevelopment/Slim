@@ -1290,8 +1290,6 @@ class Slim
      */
     public function run()
     {
-        set_error_handler(array('\Slim\Slim', 'handleErrors'));
-
         //Apply final outer middleware layers
         if ($this->config('debug')) {
             //Apply pretty exceptions only in debug to avoid accidental information leakage in production
@@ -1385,32 +1383,6 @@ class Slim
         }
     }
 
-    /********************************************************************************
-    * Error Handling and Debugging
-    *******************************************************************************/
-
-    /**
-     * Convert errors into ErrorException objects
-     *
-     * This method catches PHP errors and converts them into \ErrorException objects;
-     * these \ErrorException objects are then thrown and caught by Slim's
-     * built-in or custom error handlers.
-     *
-     * @param  int            $errno   The numeric type of the Error
-     * @param  string         $errstr  The error message
-     * @param  string         $errfile The absolute path to the affected file
-     * @param  int            $errline The line number of the error in the affected file
-     * @return bool
-     * @throws \ErrorException
-     */
-    public static function handleErrors($errno, $errstr = '', $errfile = '', $errline = '')
-    {
-        if (!($errno & error_reporting())) {
-            return;
-        }
-
-        throw new \ErrorException($errstr, $errno, 0, $errfile, $errline);
-    }
 
     /**
      * Generate diagnostic template markup
